@@ -6,6 +6,10 @@ import org.gradle.api.plugins.JavaPlugin;
 import org.gradle.api.plugins.quality.Checkstyle;
 import org.gradle.api.plugins.quality.CheckstyleExtension;
 import org.gradle.api.tasks.SourceSetContainer;
+import java.io.File;
+import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.StandardCopyOption;
 
 public class CheckstylePlugin implements Plugin<Project> {
   @Override
@@ -19,7 +23,20 @@ public class CheckstylePlugin implements Plugin<Project> {
     // Configure the Checkstyle extension
     CheckstyleExtension checkstyle = project.getExtensions().getByType(CheckstyleExtension.class);
     checkstyle.setToolVersion("10.17.0");
-    checkstyle.setConfigFile(project.file(project.getRootDir() + "/src/main/java/com/services/group4/rules.xml"));
+
+    // Load the rules.xml from the classpath
+    try (InputStream rulesConfigStream = getClass().getClassLoader().getResourceAsStream("com/services/group4/rules.xml")) {
+      if (rulesConfigStream != null) {
+        File tempRulesFile = File.createTempFile("rules", ".xml");
+        tempRulesFile.deleteOnExit();
+        Files.copy(rulesConfigStream, tempRulesFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
+        checkstyle.setConfigFile(tempRulesFile);
+      } else {
+        throw new IllegalStateException("Could not find rules.xml in the classpath");
+      }
+    } catch (Exception e) {
+      throw new RuntimeException("Failed to load rules.xml", e);
+    }
 
     // Configure Checkstyle tasks for each source set
     SourceSetContainer sourceSets = project.getExtensions().getByType(SourceSetContainer.class);

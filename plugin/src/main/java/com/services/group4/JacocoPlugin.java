@@ -33,13 +33,12 @@ public class JacocoPlugin implements Plugin<Project> {
 
     // Configure Jacoco coverage verification
     project.getTasks().withType(JacocoCoverageVerification.class).configureEach(verification -> {
-      verification.violationRules(rules -> {
-        rules.rule(rule -> {
-          rule.limit(limit -> {
-            limit.setMinimum(BigDecimal.valueOf(0.8));  // Minimum 80% coverage
-          });
+      verification.dependsOn("test");
+      verification.violationRules(rules -> rules.rule(rule -> {
+        rule.limit(limit -> {
+          limit.setMinimum(BigDecimal.valueOf(0.8));  // Minimum 80% coverage
         });
-      });
+      }));
     });
 
     // Add Jacoco coverage verification to build task if it exists

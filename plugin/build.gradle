@@ -13,7 +13,7 @@ plugins {
 }
 
 group = 'com.services.group4'
-version = "1.0.4"
+version = "1.0.6"
 
 repositories {
     // Use Maven Central for resolving dependencies.

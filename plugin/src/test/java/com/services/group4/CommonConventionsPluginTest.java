@@ -1,7 +1,6 @@
 package com.services.group4;
 
 import org.gradle.api.Project;
-import org.gradle.api.plugins.quality.Checkstyle;
 import org.gradle.testfixtures.ProjectBuilder;
 import org.junit.jupiter.api.Test;
 

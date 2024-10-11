@@ -13,7 +13,7 @@ plugins {
 }
 
 group = 'com.services.group4'
-version = "1.0.3"
+version = "1.0.4"
 
 repositories {
     // Use Maven Central for resolving dependencies.
@@ -50,6 +50,10 @@ gradlePlugin {
         jacocoPlugin {
             id =  group + '.jacoco'
             implementationClass = 'com.services.group4.JacocoPlugin'
+        }
+        commonConventionsPlugin {
+            id =  group + '.common-conventions'
+            implementationClass = 'com.services.group4.CommonConventionsPlugin'
         }
     }
 }

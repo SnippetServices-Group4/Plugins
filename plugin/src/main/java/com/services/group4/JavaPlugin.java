@@ -13,8 +13,6 @@ public class JavaPlugin implements Plugin<Project> {
     project.getPluginManager().apply("java");
 
     // Configurar el toolchain para Java con la versión 21
-    project.getExtensions().configure(JavaPluginExtension.class, javaExtension -> {
-      javaExtension.getToolchain().getLanguageVersion().set(JavaLanguageVersion.of(21));
-    });
+    project.getExtensions().configure(JavaPluginExtension.class, javaExtension -> javaExtension.getToolchain().getLanguageVersion().set(JavaLanguageVersion.of(21)));
   }
 }

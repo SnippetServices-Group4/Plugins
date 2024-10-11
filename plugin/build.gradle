@@ -43,6 +43,11 @@ gradlePlugin {
             implementationClass = 'com.services.group4.SpotlessPlugin'
             version = "1.0.0"
         }
+        jacocoPlugin {
+            id = 'com.services.group4.jacoco'
+            implementationClass = 'com.services.group4.JacocoPlugin'
+            version = "1.0.0"
+        }
     }
 }
 

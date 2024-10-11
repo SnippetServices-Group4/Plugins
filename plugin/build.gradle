@@ -12,14 +12,13 @@ plugins {
     id 'com.gradle.plugin-publish' version '1.2.0'
 }
 
-version = '0.0.5'
-
 repositories {
     // Use Maven Central for resolving dependencies.
     mavenCentral()
 }
 
 dependencies {
+    implementation "com.diffplug.spotless:spotless-plugin-gradle:6.21.0"
     // Use JUnit Jupiter for testing.
     testImplementation libs.junit.jupiter
 
@@ -32,10 +31,17 @@ gradlePlugin {
         greeting {
             id = 'org.example.greeting'
             implementationClass = 'org.example.PluginsPlugin'
+            version = "1.0.0"
         }
         checkstylePlugin {
             id = 'com.services.group4.checkstyle'
             implementationClass = 'com.services.group4.CheckstylePlugin'
+            version = "1.0.0"
+        }
+        spotlessPlugin {
+            id = 'com.services.group4.spotless'
+            implementationClass = 'com.services.group4.SpotlessPlugin'
+            version = "1.0.0"
         }
     }
 }

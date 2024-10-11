@@ -12,6 +12,9 @@ plugins {
     id 'com.gradle.plugin-publish' version '1.2.0'
 }
 
+group = 'com.services.group4'
+version = "1.0.3"
+
 repositories {
     // Use Maven Central for resolving dependencies.
     mavenCentral()
@@ -31,22 +34,22 @@ gradlePlugin {
         greeting {
             id = 'org.example.greeting'
             implementationClass = 'org.example.PluginsPlugin'
-            version = "1.0.0"
+        }
+        javaPlugin {
+            id = group + '.java'
+            implementationClass = 'com.services.group4.JavaPlugin'
         }
         checkstylePlugin {
-            id = 'com.services.group4.checkstyle'
+            id = group + '.checkstyle'
             implementationClass = 'com.services.group4.CheckstylePlugin'
-            version = "1.0.0"
         }
         spotlessPlugin {
-            id = 'com.services.group4.spotless'
+            id =  group + '.spotless'
             implementationClass = 'com.services.group4.SpotlessPlugin'
-            version = "1.0.0"
         }
         jacocoPlugin {
-            id = 'com.services.group4.jacoco'
+            id =  group + '.jacoco'
             implementationClass = 'com.services.group4.JacocoPlugin'
-            version = "1.0.0"
         }
     }
 }
